@@ -1,6 +1,6 @@
 # Dubbo-Principle
 > Depth understanding of the principles of the Dubbo and source code in project.
-
+> Dubbo URL: https://dubbo.apache.org/zh/
 
 -----------------------------------------------------------------------------------------------
 其他平台将同步更新
