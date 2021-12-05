@@ -12,6 +12,8 @@
         <module>Spring-Dubbo-producer</module>
         <module>Spring-Dubbo-Consumer</module>
         <module>Spring-Dubbo-Interface</module>
+        <module>Boot-Dubbo-Consumer</module>
+        <module>Boot-Dubbo-Producer</module>
     </modules>
 
 
