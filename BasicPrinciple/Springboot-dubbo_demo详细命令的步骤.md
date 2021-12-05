@@ -82,16 +82,33 @@
    ### 2.2 dubbo-admin配置
    
    ```shell
-    dubbo.registry.address=zookeeper://127.0.0.1:2181 修改你的Zookeeper的地址
+    Specify registry address in dubbo-admin-server/src/main/resources/application.properties
+        dubbo.registry.address=zookeeper://127.0.0.1:2181 修改你的Zookeeper的地址
     
     mvn clean package 进行的编译打包
+        mvn clean package -Dmaven.test.skip=true
+    
    ```
     
    ### 2.3 dubbo-admin运行
  
    ```shell
-    java -jar dubbo-admin-0.0.1-SNAPSHOT.jar
+    Start 
+    
+    mvn --projects dubbo-admin-server spring-boot:run OR
+    cd dubbo-admin-distribution/target; java -jar dubbo-admin-0.1.jar
+    
+    Visit http://localhost:8080
+    
+    Default username and password is root
+   ```
 
+   ### 2.4 使用的docker 构建dubbo-admin 服务
+   ```shell
+        systemctl start docker
+        docker pull apache/dubbo-admin
+        docker run -d --name dubbo-admin -p 9090:8080 -e admin.registry.address=zookeeper://192.168.25.140:2181 -e admin.config-center=zookeeper://192.168.25.140:2181 -e admin.metadata-report.address=zookeeper://192.168.25.140:2181 --restart=always docker.io/apache/dubbo-admin
+        http://IP地址:8080
    ```
 
 ## 3 构建Springboot生产者
