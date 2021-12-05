@@ -1,0 +1,8 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+org.apache.dubbo.spring.boot.autoconfigure.DubboAutoConfiguration,\
+org.apache.dubbo.spring.boot.autoconfigure.DubboRelaxedBindingAutoConfiguration,\
+org.apache.dubbo.spring.boot.autoconfigure.DubboListenerAutoConfiguration
+org.springframework.boot.env.EnvironmentPostProcessor=\
+org.apache.dubbo.spring.boot.env.DubboDefaultPropertiesEnvironmentPostProcessor
+org.springframework.context.ApplicationContextInitializer=\
+org.apache.dubbo.spring.boot.context.DubboApplicationContextInitializer
