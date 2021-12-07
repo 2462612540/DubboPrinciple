@@ -23,7 +23,7 @@ import java.util.Map;
  * Represents the default payload of a registered service in Zookeeper.
  * <p>
  * It's compatible with Spring Cloud
- *
+ * 这是Zookeeper对象的类
  * @since 2.7.5
  */
 public class ZookeeperInstance {

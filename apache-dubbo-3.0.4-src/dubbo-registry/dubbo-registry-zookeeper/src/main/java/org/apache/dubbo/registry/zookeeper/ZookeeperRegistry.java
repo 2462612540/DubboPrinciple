@@ -32,54 +32,47 @@ import org.apache.dubbo.remoting.zookeeper.ZookeeperClient;
 import org.apache.dubbo.remoting.zookeeper.ZookeeperTransporter;
 import org.apache.dubbo.rpc.RpcException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.CountDownLatch;
 
-import static org.apache.dubbo.common.constants.CommonConstants.ANY_VALUE;
-import static org.apache.dubbo.common.constants.CommonConstants.CHECK_KEY;
-import static org.apache.dubbo.common.constants.CommonConstants.INTERFACE_KEY;
-import static org.apache.dubbo.common.constants.CommonConstants.PATH_SEPARATOR;
-import static org.apache.dubbo.common.constants.RegistryConstants.CONFIGURATORS_CATEGORY;
-import static org.apache.dubbo.common.constants.RegistryConstants.CONSUMERS_CATEGORY;
-import static org.apache.dubbo.common.constants.RegistryConstants.DEFAULT_CATEGORY;
-import static org.apache.dubbo.common.constants.RegistryConstants.DYNAMIC_KEY;
-import static org.apache.dubbo.common.constants.RegistryConstants.PROVIDERS_CATEGORY;
-import static org.apache.dubbo.common.constants.RegistryConstants.ROUTERS_CATEGORY;
+import static org.apache.dubbo.common.constants.CommonConstants.*;
+import static org.apache.dubbo.common.constants.RegistryConstants.*;
 
 /**
  * ZookeeperRegistry
+ * 该类继承了CacheableFailbackRegistry类，该类就是针对注册中心核心的功能注册、订阅、取消注册、取消订阅，查询注册列表进行展开，基于zookeeper来实现
  */
 public class ZookeeperRegistry extends CacheableFailbackRegistry {
-
+    // 日志记录
     private final static Logger logger = LoggerFactory.getLogger(ZookeeperRegistry.class);
-
+    // 默认zookeeper根节点
     private final static String DEFAULT_ROOT = "dubbo";
-
+    // zookeeper根节点
     private final String root;
-
+    // 服务接口集合
     private final Set<String> anyServices = new ConcurrentHashSet<>();
-
+    // 监听器集合
     private final ConcurrentMap<URL, ConcurrentMap<NotifyListener, ChildListener>> zkListeners = new ConcurrentHashMap<>();
-
+    // zookeeper客户端实例
     private ZookeeperClient zkClient;
 
+    //ZookeeperRegistry 构造方法
     public ZookeeperRegistry(URL url, ZookeeperTransporter zookeeperTransporter) {
         super(url);
         if (url.isAnyHost()) {
             throw new IllegalStateException("registry address == null");
         }
+        // 获得url携带的分组配置，并且作为zookeeper的根节点
         String group = url.getGroup(DEFAULT_ROOT);
         if (!group.startsWith(PATH_SEPARATOR)) {
             group = PATH_SEPARATOR + group;
         }
         this.root = group;
+        // 创建zookeeper client
         zkClient = zookeeperTransporter.connect(url);
+        // 添加状态监听器，当状态为重连的时候调用恢复方法
         zkClient.addStateListener((state) -> {
             if (state == StateListener.RECONNECTED) {
                 logger.warn("Trying to fetch the latest urls, in case there're provider changes during connection loss.\n" +
@@ -89,6 +82,7 @@ public class ZookeeperRegistry extends CacheableFailbackRegistry {
             } else if (state == StateListener.NEW_SESSION_CREATED) {
                 logger.warn("Trying to re-register urls and re-subscribe listeners of this instance to registry...");
                 try {
+                    // 恢复
                     ZookeeperRegistry.this.recover();
                 } catch (Exception e) {
                     logger.error(e.getMessage(), e);
@@ -104,11 +98,13 @@ public class ZookeeperRegistry extends CacheableFailbackRegistry {
         });
     }
 
+    //是否连接
     @Override
     public boolean isAvailable() {
         return zkClient != null && zkClient.isConnected();
     }
 
+    //销毁连接
     @Override
     public void destroy() {
         super.destroy();
@@ -123,34 +119,60 @@ public class ZookeeperRegistry extends CacheableFailbackRegistry {
         }
     }
 
+    //注册
     @Override
     public void doRegister(URL url) {
         try {
             checkDestroyed();
+            //创建URL节点，也就是URL层的节点
             zkClient.create(toUrlPath(url), url.getParameter(DYNAMIC_KEY, true));
         } catch (Throwable e) {
             throw new RpcException("Failed to register " + url + " to zookeeper " + getUrl() + ", cause: " + e.getMessage(), e);
         }
     }
 
+    //取消注册
     @Override
     public void doUnregister(URL url) {
         try {
             checkDestroyed();
+            //// 删除节点
             zkClient.delete(toUrlPath(url));
         } catch (Throwable e) {
             throw new RpcException("Failed to unregister " + url + " to zookeeper " + getUrl() + ", cause: " + e.getMessage(), e);
         }
     }
+    //这个方法是订阅
 
+    /**
+     * @description Map computeIfAbsent方法说明  从map中根据key获取value操作 java8之后。上面的操作可以简化为一行，若key对应的value为空，会将第二个参数的返回值存入并返回
+     * <p>
+     * 所有Service层发起的订阅中的ChildListener是在在 Service 层发生变更时，才会做出解码，用anyServices属性判断是否是新增的服务，最后调用父类的subscribe订阅。
+     * 而指定的Service层发起的订阅是在URL层发生变更的时候，调用notify，回调回调NotifyListener的逻辑，做到通知服务变更。
+     * <p>
+     * 所有Service层发起的订阅中客户端创建的节点是Service节点，该节点为持久节点，而指定的Service层发起的订阅中创建的节点是Type节点，该节点也是持久节点。
+     * 这里补充一下zookeeper的持久节点是节点创建后，就一直存在，直到有删除操作来主动清除这个节点，不会因为创建该节点的客户端会话失效而消失。而临时节点的生命周期和客户端会话绑定。
+     * 也就是说，如果客户端会话失效，那么这个节点就会自动被清除掉。注意，这里提到的是会话失效，而非连接断开。另外，在临时节点下面不能创建子节点。
+     * <p>
+     * 指定的Service层发起的订阅中调用了两次notify，第一次是增量的通知，也就是只是通知这次增加的服务节点，而第二个是全量的通知
+     * @param: url
+     * @param: listener
+     * @date: 2021/12/7 21:11
+     * @return: void
+     * @author: xjl
+     */
     @Override
     public void doSubscribe(final URL url, final NotifyListener listener) {
         try {
             checkDestroyed();
+            // 处理所有Service层发起的订阅，例如监控中心的订阅
             if (ANY_VALUE.equals(url.getServiceInterface())) {
+                //获得根目录
                 String root = toRootPath();
                 boolean check = url.getParameter(CHECK_KEY, false);
+                // 获得url对应的监听器集合
                 ConcurrentMap<NotifyListener, ChildListener> listeners = zkListeners.computeIfAbsent(url, k -> new ConcurrentHashMap<>());
+                // 获得节点监听器
                 ChildListener zkListener = listeners.computeIfAbsent(listener, k -> (parentPath, currentChilds) -> {
                     for (String child : currentChilds) {
                         child = URL.decode(child);
@@ -161,12 +183,15 @@ public class ZookeeperRegistry extends CacheableFailbackRegistry {
                         }
                     }
                 });
+                // 创建service节点，该节点为持久节点
                 zkClient.create(root, false);
+                // 向zookeeper的service节点发起订阅，获得Service接口全名数组
                 List<String> services = zkClient.addChildListener(root, zkListener);
                 if (CollectionUtils.isNotEmpty(services)) {
                     for (String service : services) {
                         service = URL.decode(service);
                         anyServices.add(service);
+                        // 发起该service层的订阅
                         subscribe(url.setPath(service).addParameters(INTERFACE_KEY, service,
                             Constants.CHECK_KEY, String.valueOf(check)), listener);
                     }
@@ -174,9 +199,12 @@ public class ZookeeperRegistry extends CacheableFailbackRegistry {
             } else {
                 CountDownLatch latch = new CountDownLatch(1);
                 try {
+                    // 处理指定 Service 层的发起订阅，例如服务消费者的订阅
                     List<URL> urls = new ArrayList<>();
                     for (String path : toCategoriesPath(url)) {
+                        // 遍历分类数组 获得监听器集合
                         ConcurrentMap<NotifyListener, ChildListener> listeners = zkListeners.computeIfAbsent(url, k -> new ConcurrentHashMap<>());
+                        // 如果没有则创建
                         ChildListener zkListener = listeners.computeIfAbsent(listener, k -> new RegistryChildListenerImpl(url, path, k, latch));
                         if (zkListener instanceof RegistryChildListenerImpl) {
                             ((RegistryChildListenerImpl) zkListener).setLatch(latch);
@@ -189,7 +217,7 @@ public class ZookeeperRegistry extends CacheableFailbackRegistry {
                     }
                     notify(url, listener, urls);
                 } finally {
-                    // tells the listener to run only after the sync notification of main thread finishes.
+                    // 告诉监听器只有在主线程的同步通知完成后才运行
                     latch.countDown();
                 }
             }
@@ -197,18 +225,34 @@ public class ZookeeperRegistry extends CacheableFailbackRegistry {
             throw new RpcException("Failed to subscribe " + url + " to zookeeper " + getUrl() + ", cause: " + e.getMessage(), e);
         }
     }
+    //取消订阅
 
+    /**
+     * @description 所有的Service发起的取消订阅还是指定的Service发起的取消订阅。可以看到所有的Service发起的取消订阅就直接移除了根目录下所有的监听器，
+     * 而指定的Service发起的取消订阅是移除了该Service层下面的所有Type节点监听器
+     * @param: url
+     * @param: listener
+     * @date: 2021/12/7 21:18
+     * @return: void
+     * @author: xjl
+     */
     @Override
     public void doUnsubscribe(URL url, NotifyListener listener) {
         checkDestroyed();
+        // 获得监听器集合
         ConcurrentMap<NotifyListener, ChildListener> listeners = zkListeners.get(url);
         if (listeners != null) {
+            // 获得子节点的监听器
             ChildListener zkListener = listeners.remove(listener);
             if (zkListener != null) {
+                // 如果为全部的服务接口，例如监控中心
                 if (ANY_VALUE.equals(url.getServiceInterface())) {
+                    // 获得根目录
                     String root = toRootPath();
+                    // 移除监听器
                     zkClient.removeChildListener(root, zkListener);
                 } else {
+                    // 遍历分类数组进行移除监听器
                     for (String path : toCategoriesPath(url)) {
                         zkClient.removeChildListener(path, zkListener);
                     }
@@ -221,6 +265,7 @@ public class ZookeeperRegistry extends CacheableFailbackRegistry {
         }
     }
 
+    //该方法就是查询符合条件的已经注册的服务。调用了toUrlsWithoutEmpty方法
     @Override
     public List<URL> lookup(URL url) {
         if (url == null) {
@@ -229,12 +274,15 @@ public class ZookeeperRegistry extends CacheableFailbackRegistry {
         try {
             checkDestroyed();
             List<String> providers = new ArrayList<>();
+            // 遍历分组类别
             for (String path : toCategoriesPath(url)) {
+                // 获得子节点
                 List<String> children = zkClient.getChildren(path);
                 if (children != null) {
                     providers.addAll(children);
                 }
             }
+            // 获得 providers 中，和 consumer 匹配的 URL 数组
             return toUrlsWithoutEmpty(url, providers);
         } catch (Throwable e) {
             throw new RpcException("Failed to lookup " + url + " from zookeeper " + getUrl() + ", cause: " + e.getMessage(), e);
@@ -252,6 +300,7 @@ public class ZookeeperRegistry extends CacheableFailbackRegistry {
         return root;
     }
 
+    //该方法是获得服务路径，拼接规则：Root + Type。
     private String toServicePath(URL url) {
         String name = url.getServiceInterface();
         if (ANY_VALUE.equals(name)) {
@@ -260,6 +309,7 @@ public class ZookeeperRegistry extends CacheableFailbackRegistry {
         return toRootDir() + URL.encode(name);
     }
 
+    //第一个方法是获得分类数组，也就是url携带的服务下的所有Type节点数组。
     private String[] toCategoriesPath(URL url) {
         String[] categories;
         if (ANY_VALUE.equals(url.getCategory())) {
@@ -274,10 +324,12 @@ public class ZookeeperRegistry extends CacheableFailbackRegistry {
         return paths;
     }
 
+    // 第二个是获得分类路径，分类路径拼接规则：Root + Service + Type
     private String toCategoryPath(URL url) {
         return toServicePath(url) + PATH_SEPARATOR + url.getCategory(DEFAULT_CATEGORY);
     }
 
+    //该方法是获得URL路径，拼接规则是Root + Service + Type + URL
     private String toUrlPath(URL url) {
         return toCategoryPath(url) + PATH_SEPARATOR + URL.encode(url.toFullString());
     }

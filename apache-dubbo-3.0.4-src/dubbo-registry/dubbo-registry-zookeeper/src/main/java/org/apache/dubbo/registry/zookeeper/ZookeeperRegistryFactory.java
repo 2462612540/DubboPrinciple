@@ -24,7 +24,7 @@ import org.apache.dubbo.remoting.zookeeper.ZookeeperTransporter;
 import org.apache.dubbo.rpc.model.ApplicationModel;
 
 /**
- * ZookeeperRegistryFactory.
+ * ZookeeperRegistryFactory.可以看到就是实例化了ZookeeperRegistry而已
  */
 public class ZookeeperRegistryFactory extends AbstractRegistryFactory {
 
@@ -49,6 +49,7 @@ public class ZookeeperRegistryFactory extends AbstractRegistryFactory {
 
     @Override
     public Registry createRegistry(URL url) {
+        //实例化ZookeeperRegistry对象 这个是
         return new ZookeeperRegistry(url, zookeeperTransporter);
     }
 
