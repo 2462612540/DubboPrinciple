@@ -89,6 +89,7 @@ public class ZookeeperRegistryTest {
         }
 
         registered = zookeeperRegistry.getRegistered();
+        System.out.println(registered);
         assertThat(registered.size(), is(1));
     }
 

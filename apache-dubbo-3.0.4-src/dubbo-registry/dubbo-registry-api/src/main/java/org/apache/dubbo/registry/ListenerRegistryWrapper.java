@@ -24,34 +24,43 @@ import org.apache.dubbo.common.utils.CollectionUtils;
 import org.apache.dubbo.common.utils.UrlUtils;
 
 import java.util.List;
-
+/**
+ * @description  监听注册包装器
+  * @param: null
+ * @date: 2021/12/7 8:51
+ * @return:
+ * @author: Jiale_Xiong
+*/
 public class ListenerRegistryWrapper implements Registry {
     private static final Logger logger = LoggerFactory.getLogger(ListenerRegistryWrapper.class);
 
     private final Registry registry;
     private final List<RegistryServiceListener> listeners;
 
-
     public ListenerRegistryWrapper(Registry registry, List<RegistryServiceListener> listeners) {
         this.registry = registry;
         this.listeners = listeners;
     }
 
+    //获取到的注册的URL的具体的参数
     @Override
     public URL getUrl() {
         return registry.getUrl();
     }
 
+    //判断时候有可用的URL
     @Override
     public boolean isAvailable() {
         return registry.isAvailable();
     }
 
+    //注册中心删除注册信息
     @Override
     public void destroy() {
         registry.destroy();
     }
 
+    //向注册者中心注册URL
     @Override
     public void register(URL url) {
         try {
@@ -157,6 +166,7 @@ public class ListenerRegistryWrapper implements Registry {
         return registry.lookup(url);
     }
 
+    //返回注册者
     public Registry getRegistry() {
         return registry;
     }

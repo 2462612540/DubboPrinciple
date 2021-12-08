@@ -16,7 +16,13 @@
  */
 
 package org.apache.dubbo.registry;
-
+/**
+ * @description 定义的是注册中心的使用的常量
+  * @param: null
+ * @date: 2021/12/7 8:46
+ * @return: 
+ * @author: Jiale_Xiong
+*/
 public interface Constants {
     String REGISTER_IP_KEY = "register.ip";
 
