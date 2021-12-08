@@ -50,19 +50,24 @@ import static org.apache.dubbo.registry.zookeeper.util.CuratorFrameworkUtils.bui
 import static org.apache.dubbo.rpc.RpcException.REGISTRY_EXCEPTION;
 
 /**
+ * @description  Zookeeper服务发现
+  * @param: null
+ * @date: 2021/12/7 21:57
+ * @return:
+ * @author: xjl
  * Zookeeper {@link ServiceDiscovery} implementation based on
  * <a href="https://curator.apache.org/curator-x-discovery/index.html">Apache Curator X Discovery</a>
  */
 public class ZookeeperServiceDiscovery extends AbstractServiceDiscovery {
 
     private final Logger logger = LoggerFactory.getLogger(getClass());
-
+    //注册的URL
     private URL registryURL;
-
+    //zookeeper的客户端
     private CuratorFramework curatorFramework;
-
+    //根路径
     private String rootPath;
-
+    //服务发现对象
     private org.apache.curator.x.discovery.ServiceDiscovery<ZookeeperInstance> serviceDiscovery;
 
     /**
@@ -121,7 +126,7 @@ public class ZookeeperServiceDiscovery extends AbstractServiceDiscovery {
     public List<ServiceInstance> getInstances(String serviceName) throws NullPointerException {
         return doInServiceDiscovery(s -> build(registryURL, s.queryForInstances(serviceName)));
     }
-
+    //获取的Zookeeper的注册好的健康实例对象
     @Override
     public Page<ServiceInstance> getInstances(String serviceName, int offset, int pageSize, boolean healthyOnly) {
         String path = buildServicePath(serviceName);
@@ -163,13 +168,13 @@ public class ZookeeperServiceDiscovery extends AbstractServiceDiscovery {
             return new DefaultPage<>(offset, pageSize, serviceInstances, totalSize);
         });
     }
-
+    //添加服务实例更改侦听器
     @Override
     public void addServiceInstancesChangedListener(ServiceInstancesChangedListener listener)
         throws NullPointerException, IllegalArgumentException {
         listener.getServiceNames().forEach(serviceName -> registerServiceWatcher(serviceName, listener));
     }
-
+    //删除服务实例更改侦听器
     @Override
     public void removeServiceInstancesChangedListener(ServiceInstancesChangedListener listener) throws IllegalArgumentException {
         listener.getServiceNames().forEach(serviceName -> {

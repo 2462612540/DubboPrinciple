@@ -41,6 +41,10 @@ import static org.apache.dubbo.common.constants.CommonConstants.*;
 import static org.apache.dubbo.common.constants.RegistryConstants.*;
 
 /**
+ * @description
+ * @date: 2021/12/7 21:55
+ * @return:
+ * @author: xjl
  * ZookeeperRegistry
  * 该类继承了CacheableFailbackRegistry类，该类就是针对注册中心核心的功能注册、订阅、取消注册、取消订阅，查询注册列表进行展开，基于zookeeper来实现
  */
@@ -167,7 +171,7 @@ public class ZookeeperRegistry extends CacheableFailbackRegistry {
             checkDestroyed();
             // 处理所有Service层发起的订阅，例如监控中心的订阅
             if (ANY_VALUE.equals(url.getServiceInterface())) {
-                //获得根目录
+                //获得根目录 订阅所有数据
                 String root = toRootPath();
                 boolean check = url.getParameter(CHECK_KEY, false);
                 // 获得url对应的监听器集合
