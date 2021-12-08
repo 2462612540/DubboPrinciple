@@ -14,6 +14,7 @@
         <module>Spring-Dubbo-Interface</module>
         <module>Boot-Dubbo-Consumer</module>
         <module>Boot-Dubbo-Producer</module>
+        <module>Dubbo-SPI-Demo</module>
     </modules>
 
 
