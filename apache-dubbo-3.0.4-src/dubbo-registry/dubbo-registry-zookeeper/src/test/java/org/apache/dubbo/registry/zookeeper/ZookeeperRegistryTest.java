@@ -47,8 +47,9 @@ import static org.mockito.Mockito.mock;
 public class ZookeeperRegistryTest {
     private TestingServer zkServer;
     private ZookeeperRegistry zookeeperRegistry;
-    private String service = "org.apache.dubbo.test.injvmServie";
+    private String service = "org.apache.dubbo.test.zhuangxiaoyan";
     private URL serviceUrl = URL.valueOf("zookeeper://zookeeper/" + service + "?notify=false&methods=test1,test2");
+    private URL serviceUrl2 = URL.valueOf("zookeeper://zookeeper/" + service + "?notify=false&methods=test3,test4");
     private URL anyUrl = URL.valueOf("zookeeper://zookeeper/*");
     private URL registryUrl;
     private ZookeeperRegistryFactory zookeeperRegistryFactory;
@@ -84,13 +85,15 @@ public class ZookeeperRegistryTest {
 
         for (int i = 0; i < 2; i++) {
             zookeeperRegistry.register(serviceUrl);
+            zookeeperRegistry.register(anyUrl);
+            zookeeperRegistry.register(serviceUrl2);
             registered = zookeeperRegistry.getRegistered();
             assertThat(registered.contains(serviceUrl), is(true));
         }
 
         registered = zookeeperRegistry.getRegistered();
         System.out.println(registered);
-        assertThat(registered.size(), is(1));
+        assertThat(registered.size(), is(3));
     }
 
     @Test

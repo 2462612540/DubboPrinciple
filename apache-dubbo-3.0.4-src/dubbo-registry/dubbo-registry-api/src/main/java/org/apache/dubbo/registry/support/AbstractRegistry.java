@@ -86,7 +86,7 @@ public abstract class AbstractRegistry implements Registry {
     private final AtomicInteger savePropertiesRetryTimes = new AtomicInteger();
     private final Set<URL> registered = new ConcurrentHashSet<>();
     private final ConcurrentMap<URL, Set<NotifyListener>> subscribed = new ConcurrentHashMap<>();
-    private final ConcurrentMap<URL, Map<String, List<URL>>> notified = new ConcurrentHashMap<>();
+    private final ConcurrentMap<URL, Map<String, List<URL>>> notified = new ConcurrentHashMap<>();//缓存服务对象
     // Is it synchronized to save the file
     private boolean syncSaveFile;
     private URL registryUrl;
@@ -215,7 +215,7 @@ public abstract class AbstractRegistry implements Registry {
             logger.warn("Failed to save registry cache file, will retry, cause: " + e.getMessage(), e);
         }
     }
-
+    //加载缓存中的文件
     private void loadProperties() {
         if (file != null && file.exists()) {
             InputStream in = null;
@@ -371,7 +371,7 @@ public abstract class AbstractRegistry implements Registry {
             }
         }
     }
-
+    //缓存的保存与更新
     protected void notify(List<URL> urls) {
         if (CollectionUtils.isEmpty(urls)) {
             return;
@@ -399,7 +399,7 @@ public abstract class AbstractRegistry implements Registry {
 
     /**
      * Notify changes from the Provider side.
-     *
+     * 缓存的保存与更新 方法的重载
      * @param url      consumer side url
      * @param listener listener
      * @param urls     provider latest urls
