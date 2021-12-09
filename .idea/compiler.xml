@@ -1,0 +1,408 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="dubbo-spring-boot-actuator (1)" />
+        <module name="dubbo-build-tools" />
+        <module name="dubbo-spring-boot-autoconfigure" />
+        <module name="dubbo-spring-boot-starter" />
+        <module name="dubbo-spring-boot-autoconfigure (1)" />
+        <module name="dubbo-spring-boot-actuator-compatible" />
+        <module name="dubbo-build-tools (1)" />
+        <module name="dubbo-spring-boot-autoconfigure-compatible (1)" />
+        <module name="dubbo-spring-boot-actuator-compatible (1)" />
+        <module name="dubbo-spring-boot-autoconfigure-compatible" />
+        <module name="dubbo-spring-boot-actuator" />
+        <module name="dubbo-spring-boot-starter (1)" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="dubbo" target="1.8" />
+      <module name="dubbo-auth" target="1.8" />
+      <module name="dubbo-auth (1)" target="1.8" />
+      <module name="dubbo-bom" target="1.8" />
+      <module name="dubbo-build-tools" target="1.5" />
+      <module name="dubbo-build-tools (1)" target="1.5" />
+      <module name="dubbo-cluster" target="1.8" />
+      <module name="dubbo-cluster (1)" target="1.8" />
+      <module name="dubbo-common" target="1.8" />
+      <module name="dubbo-common (1)" target="1.8" />
+      <module name="dubbo-compatible" target="1.8" />
+      <module name="dubbo-compatible (1)" target="1.8" />
+      <module name="dubbo-config" target="1.8" />
+      <module name="dubbo-config (1)" target="1.8" />
+      <module name="dubbo-config-api" target="1.8" />
+      <module name="dubbo-config-api (1)" target="1.8" />
+      <module name="dubbo-config-spring" target="1.8" />
+      <module name="dubbo-config-spring (1)" target="1.8" />
+      <module name="dubbo-configcenter" target="1.8" />
+      <module name="dubbo-configcenter (1)" target="1.8" />
+      <module name="dubbo-configcenter-apollo" target="1.8" />
+      <module name="dubbo-configcenter-apollo (1)" target="1.8" />
+      <module name="dubbo-configcenter-consul" target="1.8" />
+      <module name="dubbo-configcenter-etcd" target="1.8" />
+      <module name="dubbo-configcenter-nacos" target="1.8" />
+      <module name="dubbo-configcenter-nacos (1)" target="1.8" />
+      <module name="dubbo-configcenter-zookeeper" target="1.8" />
+      <module name="dubbo-configcenter-zookeeper (1)" target="1.8" />
+      <module name="dubbo-container" target="1.8" />
+      <module name="dubbo-container (1)" target="1.8" />
+      <module name="dubbo-container-api" target="1.8" />
+      <module name="dubbo-container-api (1)" target="1.8" />
+      <module name="dubbo-container-log4j" target="1.8" />
+      <module name="dubbo-container-logback" target="1.8" />
+      <module name="dubbo-container-spring" target="1.8" />
+      <module name="dubbo-container-spring (1)" target="1.8" />
+      <module name="dubbo-demo" target="1.8" />
+      <module name="dubbo-demo (1)" target="1.8" />
+      <module name="dubbo-demo-annotation" target="1.8" />
+      <module name="dubbo-demo-annotation (1)" target="1.8" />
+      <module name="dubbo-demo-annotation-consumer" target="1.8" />
+      <module name="dubbo-demo-annotation-consumer (1)" target="1.8" />
+      <module name="dubbo-demo-annotation-provider" target="1.8" />
+      <module name="dubbo-demo-annotation-provider (1)" target="1.8" />
+      <module name="dubbo-demo-api" target="1.8" />
+      <module name="dubbo-demo-api (1)" target="1.8" />
+      <module name="dubbo-demo-api-consumer" target="1.8" />
+      <module name="dubbo-demo-api-consumer (1)" target="1.8" />
+      <module name="dubbo-demo-api-provider" target="1.8" />
+      <module name="dubbo-demo-api-provider (1)" target="1.8" />
+      <module name="dubbo-demo-generic-call" target="1.8" />
+      <module name="dubbo-demo-interface" target="1.8" />
+      <module name="dubbo-demo-interface (1)" target="1.8" />
+      <module name="dubbo-demo-native" target="1.8" />
+      <module name="dubbo-demo-native-consumer" target="1.8" />
+      <module name="dubbo-demo-native-interface" target="1.8" />
+      <module name="dubbo-demo-native-provider" target="1.8" />
+      <module name="dubbo-demo-triple" target="1.8" />
+      <module name="dubbo-demo-xml" target="1.8" />
+      <module name="dubbo-demo-xml (1)" target="1.8" />
+      <module name="dubbo-demo-xml-consumer" target="1.8" />
+      <module name="dubbo-demo-xml-consumer (1)" target="1.8" />
+      <module name="dubbo-demo-xml-provider" target="1.8" />
+      <module name="dubbo-demo-xml-provider (1)" target="1.8" />
+      <module name="dubbo-dependencies" target="1.8" />
+      <module name="dubbo-dependencies (1)" target="1.8" />
+      <module name="dubbo-dependencies-bom" target="1.7" />
+      <module name="dubbo-dependencies-bom (1)" target="1.7" />
+      <module name="dubbo-dependencies-zookeeper" target="1.7" />
+      <module name="dubbo-dependencies-zookeeper (1)" target="1.7" />
+      <module name="dubbo-distribution" target="1.8" />
+      <module name="dubbo-distribution (1)" target="1.8" />
+      <module name="dubbo-filter" target="1.8" />
+      <module name="dubbo-filter (1)" target="1.8" />
+      <module name="dubbo-filter-cache" target="1.8" />
+      <module name="dubbo-filter-cache (1)" target="1.8" />
+      <module name="dubbo-filter-validation" target="1.8" />
+      <module name="dubbo-filter-validation (1)" target="1.8" />
+      <module name="dubbo-metadata" target="1.8" />
+      <module name="dubbo-metadata (1)" target="1.8" />
+      <module name="dubbo-metadata-api" target="1.8" />
+      <module name="dubbo-metadata-api (1)" target="1.8" />
+      <module name="dubbo-metadata-definition-protobuf" target="1.8" />
+      <module name="dubbo-metadata-definition-protobuf (1)" target="1.8" />
+      <module name="dubbo-metadata-processor" target="1.8" />
+      <module name="dubbo-metadata-processor (1)" target="1.8" />
+      <module name="dubbo-metadata-report-consul" target="1.8" />
+      <module name="dubbo-metadata-report-etcd" target="1.8" />
+      <module name="dubbo-metadata-report-failover" target="1.8" />
+      <module name="dubbo-metadata-report-nacos" target="1.8" />
+      <module name="dubbo-metadata-report-nacos (1)" target="1.8" />
+      <module name="dubbo-metadata-report-redis" target="1.8" />
+      <module name="dubbo-metadata-report-redis (1)" target="1.8" />
+      <module name="dubbo-metadata-report-zookeeper" target="1.8" />
+      <module name="dubbo-metadata-report-zookeeper (1)" target="1.8" />
+      <module name="dubbo-metrics" target="1.8" />
+      <module name="dubbo-metrics-api" target="1.8" />
+      <module name="dubbo-metrics-prometheus" target="1.8" />
+      <module name="dubbo-monitor" target="1.8" />
+      <module name="dubbo-monitor (1)" target="1.8" />
+      <module name="dubbo-monitor-api" target="1.8" />
+      <module name="dubbo-monitor-api (1)" target="1.8" />
+      <module name="dubbo-monitor-default" target="1.8" />
+      <module name="dubbo-monitor-default (1)" target="1.8" />
+      <module name="dubbo-native" target="1.8" />
+      <module name="dubbo-native-plugin" target="1.8" />
+      <module name="dubbo-parent" target="1.8" />
+      <module name="dubbo-parent2.6x" target="1.8" />
+      <module name="dubbo-plugin" target="1.8" />
+      <module name="dubbo-plugin (1)" target="1.8" />
+      <module name="dubbo-qos" target="1.8" />
+      <module name="dubbo-qos (1)" target="1.8" />
+      <module name="dubbo-registry" target="1.8" />
+      <module name="dubbo-registry (1)" target="1.8" />
+      <module name="dubbo-registry-api" target="1.8" />
+      <module name="dubbo-registry-api (1)" target="1.8" />
+      <module name="dubbo-registry-consul" target="1.8" />
+      <module name="dubbo-registry-default" target="1.8" />
+      <module name="dubbo-registry-dns" target="1.8" />
+      <module name="dubbo-registry-etcd3" target="1.8" />
+      <module name="dubbo-registry-eureka" target="1.8" />
+      <module name="dubbo-registry-kubernetes" target="1.8" />
+      <module name="dubbo-registry-multicast" target="1.8" />
+      <module name="dubbo-registry-multicast (1)" target="1.8" />
+      <module name="dubbo-registry-multiple" target="1.8" />
+      <module name="dubbo-registry-multiple (1)" target="1.8" />
+      <module name="dubbo-registry-nacos" target="1.8" />
+      <module name="dubbo-registry-nacos (1)" target="1.8" />
+      <module name="dubbo-registry-redis" target="1.8" />
+      <module name="dubbo-registry-sofa" target="1.8" />
+      <module name="dubbo-registry-xds" target="1.8" />
+      <module name="dubbo-registry-zookeeper" target="1.8" />
+      <module name="dubbo-registry-zookeeper (1)" target="1.8" />
+      <module name="dubbo-remoting" target="1.8" />
+      <module name="dubbo-remoting (1)" target="1.8" />
+      <module name="dubbo-remoting-api" target="1.8" />
+      <module name="dubbo-remoting-api (1)" target="1.8" />
+      <module name="dubbo-remoting-etcd3" target="1.8" />
+      <module name="dubbo-remoting-grizzly" target="1.8" />
+      <module name="dubbo-remoting-http" target="1.8" />
+      <module name="dubbo-remoting-http (1)" target="1.8" />
+      <module name="dubbo-remoting-mina" target="1.8" />
+      <module name="dubbo-remoting-netty" target="1.8" />
+      <module name="dubbo-remoting-netty (1)" target="1.8" />
+      <module name="dubbo-remoting-netty4" target="1.8" />
+      <module name="dubbo-remoting-netty4 (1)" target="1.8" />
+      <module name="dubbo-remoting-p2p" target="1.8" />
+      <module name="dubbo-remoting-redis" target="1.8" />
+      <module name="dubbo-remoting-zookeeper" target="1.8" />
+      <module name="dubbo-remoting-zookeeper (1)" target="1.8" />
+      <module name="dubbo-remoting-zookeeper-curator5" target="1.8" />
+      <module name="dubbo-rpc" target="1.8" />
+      <module name="dubbo-rpc (1)" target="1.8" />
+      <module name="dubbo-rpc-api" target="1.8" />
+      <module name="dubbo-rpc-api (1)" target="1.8" />
+      <module name="dubbo-rpc-dubbo" target="1.8" />
+      <module name="dubbo-rpc-dubbo (1)" target="1.8" />
+      <module name="dubbo-rpc-grpc" target="1.8" />
+      <module name="dubbo-rpc-grpc (1)" target="1.8" />
+      <module name="dubbo-rpc-hessian" target="1.8" />
+      <module name="dubbo-rpc-http" target="1.8" />
+      <module name="dubbo-rpc-injvm" target="1.8" />
+      <module name="dubbo-rpc-injvm (1)" target="1.8" />
+      <module name="dubbo-rpc-memcached" target="1.8" />
+      <module name="dubbo-rpc-native-thrift" target="1.8" />
+      <module name="dubbo-rpc-redis" target="1.8" />
+      <module name="dubbo-rpc-rest" target="1.8" />
+      <module name="dubbo-rpc-rest (1)" target="1.8" />
+      <module name="dubbo-rpc-rmi" target="1.8" />
+      <module name="dubbo-rpc-thrift" target="1.8" />
+      <module name="dubbo-rpc-triple" target="1.8" />
+      <module name="dubbo-rpc-webservice" target="1.8" />
+      <module name="dubbo-rpc-xml" target="1.8" />
+      <module name="dubbo-serialization" target="1.8" />
+      <module name="dubbo-serialization (1)" target="1.8" />
+      <module name="dubbo-serialization-api" target="1.8" />
+      <module name="dubbo-serialization-api (1)" target="1.8" />
+      <module name="dubbo-serialization-avro" target="1.8" />
+      <module name="dubbo-serialization-fastjson" target="1.8" />
+      <module name="dubbo-serialization-fst" target="1.8" />
+      <module name="dubbo-serialization-gson" target="1.8" />
+      <module name="dubbo-serialization-hessian2" target="1.8" />
+      <module name="dubbo-serialization-hessian2 (1)" target="1.8" />
+      <module name="dubbo-serialization-jdk" target="1.8" />
+      <module name="dubbo-serialization-jdk (1)" target="1.8" />
+      <module name="dubbo-serialization-kryo" target="1.8" />
+      <module name="dubbo-serialization-msgpack" target="1.8" />
+      <module name="dubbo-serialization-native-hession" target="1.8" />
+      <module name="dubbo-serialization-protobuf" target="1.8" />
+      <module name="dubbo-serialization-protostuff" target="1.8" />
+      <module name="dubbo-serialization-test" target="1.8" />
+      <module name="dubbo-SPI" target="1.8" />
+      <module name="dubbo-spring-boot" target="1.8" />
+      <module name="dubbo-spring-boot (1)" target="1.8" />
+      <module name="dubbo-spring-boot-actuator" target="1.8" />
+      <module name="dubbo-spring-boot-actuator (1)" target="1.8" />
+      <module name="dubbo-spring-boot-actuator-compatible" target="1.8" />
+      <module name="dubbo-spring-boot-actuator-compatible (1)" target="1.8" />
+      <module name="dubbo-spring-boot-autoconfigure" target="1.8" />
+      <module name="dubbo-spring-boot-autoconfigure (1)" target="1.8" />
+      <module name="dubbo-spring-boot-autoconfigure-compatible" target="1.8" />
+      <module name="dubbo-spring-boot-autoconfigure-compatible (1)" target="1.8" />
+      <module name="dubbo-spring-boot-compatible" target="1.8" />
+      <module name="dubbo-spring-boot-compatible (1)" target="1.8" />
+      <module name="dubbo-spring-boot-starter" target="1.8" />
+      <module name="dubbo-spring-boot-starter (1)" target="1.8" />
+      <module name="dubbo-test" target="1.8" />
+      <module name="dubbo-test-check" target="1.8" />
+      <module name="dubbo-test-common" target="1.8" />
+      <module name="dubbo-test-spring" target="1.8" />
+      <module name="dubbo-test-spring3.2" target="1.8" />
+      <module name="dubbo-test-spring4.1" target="1.8" />
+      <module name="dubbo-test-spring4.2" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="dubbo" options="-proc:none -parameters" />
+      <module name="dubbo-SPI" options="-proc:none -parameters" />
+      <module name="dubbo-auth" options="-proc:none -parameters" />
+      <module name="dubbo-auth (1)" options="-proc:none -parameters" />
+      <module name="dubbo-cluster" options="-proc:none -parameters" />
+      <module name="dubbo-cluster (1)" options="-proc:none -parameters" />
+      <module name="dubbo-common" options="-proc:none -parameters" />
+      <module name="dubbo-common (1)" options="-proc:none -parameters" />
+      <module name="dubbo-compatible" options="-proc:none -parameters" />
+      <module name="dubbo-compatible (1)" options="-proc:none -parameters" />
+      <module name="dubbo-config-api" options="-proc:none -parameters" />
+      <module name="dubbo-config-api (1)" options="-proc:none -parameters" />
+      <module name="dubbo-config-spring" options="-proc:none -parameters" />
+      <module name="dubbo-config-spring (1)" options="-proc:none -parameters" />
+      <module name="dubbo-configcenter-apollo" options="-proc:none -parameters" />
+      <module name="dubbo-configcenter-apollo (1)" options="-proc:none -parameters" />
+      <module name="dubbo-configcenter-consul" options="-proc:none -parameters" />
+      <module name="dubbo-configcenter-etcd" options="-proc:none -parameters" />
+      <module name="dubbo-configcenter-nacos" options="-proc:none -parameters" />
+      <module name="dubbo-configcenter-nacos (1)" options="-proc:none -parameters" />
+      <module name="dubbo-configcenter-zookeeper" options="-proc:none -parameters" />
+      <module name="dubbo-configcenter-zookeeper (1)" options="-proc:none -parameters" />
+      <module name="dubbo-container-api" options="-proc:none -parameters" />
+      <module name="dubbo-container-api (1)" options="-proc:none -parameters" />
+      <module name="dubbo-container-log4j" options="-proc:none -parameters" />
+      <module name="dubbo-container-logback" options="-proc:none -parameters" />
+      <module name="dubbo-container-spring" options="-proc:none -parameters" />
+      <module name="dubbo-container-spring (1)" options="-proc:none -parameters" />
+      <module name="dubbo-demo-annotation-consumer" options="-proc:none -parameters" />
+      <module name="dubbo-demo-annotation-consumer (1)" options="-proc:none -parameters" />
+      <module name="dubbo-demo-annotation-provider" options="-proc:none -parameters" />
+      <module name="dubbo-demo-annotation-provider (1)" options="-proc:none -parameters" />
+      <module name="dubbo-demo-api-consumer" options="-proc:none -parameters" />
+      <module name="dubbo-demo-api-consumer (1)" options="-proc:none -parameters" />
+      <module name="dubbo-demo-api-provider" options="-proc:none -parameters" />
+      <module name="dubbo-demo-api-provider (1)" options="-proc:none -parameters" />
+      <module name="dubbo-demo-generic-call" options="-proc:none -parameters" />
+      <module name="dubbo-demo-interface" options="-proc:none -parameters" />
+      <module name="dubbo-demo-interface (1)" options="-proc:none -parameters" />
+      <module name="dubbo-demo-native-consumer" options="-proc:none -parameters" />
+      <module name="dubbo-demo-native-interface" options="-proc:none -parameters" />
+      <module name="dubbo-demo-native-provider" options="-proc:none -parameters" />
+      <module name="dubbo-demo-triple" options="-proc:none -parameters" />
+      <module name="dubbo-demo-xml-consumer" options="-proc:none -parameters" />
+      <module name="dubbo-demo-xml-consumer (1)" options="-proc:none -parameters" />
+      <module name="dubbo-demo-xml-provider" options="-proc:none -parameters" />
+      <module name="dubbo-demo-xml-provider (1)" options="-proc:none -parameters" />
+      <module name="dubbo-filter-cache" options="-proc:none -parameters" />
+      <module name="dubbo-filter-cache (1)" options="-proc:none -parameters" />
+      <module name="dubbo-filter-validation" options="-proc:none -parameters" />
+      <module name="dubbo-filter-validation (1)" options="-proc:none -parameters" />
+      <module name="dubbo-metadata-api" options="-proc:none -parameters" />
+      <module name="dubbo-metadata-api (1)" options="-proc:none -parameters" />
+      <module name="dubbo-metadata-definition-protobuf" options="-proc:none -parameters" />
+      <module name="dubbo-metadata-definition-protobuf (1)" options="-proc:none -parameters" />
+      <module name="dubbo-metadata-processor" options="-proc:none -parameters" />
+      <module name="dubbo-metadata-processor (1)" options="-proc:none -parameters" />
+      <module name="dubbo-metadata-report-consul" options="-proc:none -parameters" />
+      <module name="dubbo-metadata-report-etcd" options="-proc:none -parameters" />
+      <module name="dubbo-metadata-report-failover" options="-proc:none -parameters" />
+      <module name="dubbo-metadata-report-nacos" options="-proc:none -parameters" />
+      <module name="dubbo-metadata-report-nacos (1)" options="-proc:none -parameters" />
+      <module name="dubbo-metadata-report-redis" options="-proc:none -parameters" />
+      <module name="dubbo-metadata-report-redis (1)" options="-proc:none -parameters" />
+      <module name="dubbo-metadata-report-zookeeper" options="-proc:none -parameters" />
+      <module name="dubbo-metadata-report-zookeeper (1)" options="-proc:none -parameters" />
+      <module name="dubbo-metrics-api" options="-proc:none -parameters" />
+      <module name="dubbo-metrics-prometheus" options="-proc:none -parameters" />
+      <module name="dubbo-monitor (1)" options="-proc:none -parameters" />
+      <module name="dubbo-monitor-api" options="-proc:none -parameters" />
+      <module name="dubbo-monitor-api (1)" options="-proc:none -parameters" />
+      <module name="dubbo-monitor-default" options="-proc:none -parameters" />
+      <module name="dubbo-monitor-default (1)" options="-proc:none -parameters" />
+      <module name="dubbo-native" options="-proc:none -parameters" />
+      <module name="dubbo-native-plugin" options="-proc:none -parameters" />
+      <module name="dubbo-qos" options="-proc:none -parameters" />
+      <module name="dubbo-qos (1)" options="-proc:none -parameters" />
+      <module name="dubbo-registry" options="" />
+      <module name="dubbo-registry-api" options="-proc:none -parameters" />
+      <module name="dubbo-registry-api (1)" options="-proc:none -parameters" />
+      <module name="dubbo-registry-consul" options="-proc:none -parameters" />
+      <module name="dubbo-registry-default" options="-proc:none -parameters" />
+      <module name="dubbo-registry-dns" options="-proc:none -parameters" />
+      <module name="dubbo-registry-etcd3" options="-proc:none -parameters" />
+      <module name="dubbo-registry-eureka" options="-proc:none -parameters" />
+      <module name="dubbo-registry-kubernetes" options="-proc:none -parameters" />
+      <module name="dubbo-registry-multicast" options="-proc:none -parameters" />
+      <module name="dubbo-registry-multicast (1)" options="-proc:none -parameters" />
+      <module name="dubbo-registry-multiple" options="-proc:none -parameters" />
+      <module name="dubbo-registry-multiple (1)" options="-proc:none -parameters" />
+      <module name="dubbo-registry-nacos" options="-proc:none -parameters" />
+      <module name="dubbo-registry-nacos (1)" options="-proc:none -parameters" />
+      <module name="dubbo-registry-redis" options="-proc:none -parameters" />
+      <module name="dubbo-registry-sofa" options="-proc:none -parameters" />
+      <module name="dubbo-registry-xds" options="-proc:none -parameters" />
+      <module name="dubbo-registry-zookeeper" options="-proc:none -parameters" />
+      <module name="dubbo-registry-zookeeper (1)" options="-proc:none -parameters" />
+      <module name="dubbo-remoting-api" options="-proc:none -parameters" />
+      <module name="dubbo-remoting-api (1)" options="-proc:none -parameters" />
+      <module name="dubbo-remoting-etcd3" options="-proc:none -parameters" />
+      <module name="dubbo-remoting-grizzly" options="-proc:none -parameters" />
+      <module name="dubbo-remoting-http" options="-proc:none -parameters" />
+      <module name="dubbo-remoting-http (1)" options="-proc:none -parameters" />
+      <module name="dubbo-remoting-mina" options="-proc:none -parameters" />
+      <module name="dubbo-remoting-netty" options="-proc:none -parameters" />
+      <module name="dubbo-remoting-netty (1)" options="-proc:none -parameters" />
+      <module name="dubbo-remoting-netty4" options="-proc:none -parameters" />
+      <module name="dubbo-remoting-netty4 (1)" options="-proc:none -parameters" />
+      <module name="dubbo-remoting-p2p" options="-proc:none -parameters" />
+      <module name="dubbo-remoting-redis" options="-proc:none -parameters" />
+      <module name="dubbo-remoting-zookeeper" options="-proc:none -parameters" />
+      <module name="dubbo-remoting-zookeeper (1)" options="-proc:none -parameters" />
+      <module name="dubbo-remoting-zookeeper-curator5" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-api" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-api (1)" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-dubbo" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-dubbo (1)" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-grpc" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-grpc (1)" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-hessian" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-http" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-injvm" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-injvm (1)" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-memcached" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-native-thrift" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-redis" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-rest" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-rest (1)" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-rmi" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-thrift" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-triple" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-webservice" options="-proc:none -parameters" />
+      <module name="dubbo-rpc-xml" options="-proc:none -parameters" />
+      <module name="dubbo-serialization-api" options="-proc:none -parameters" />
+      <module name="dubbo-serialization-api (1)" options="-proc:none -parameters" />
+      <module name="dubbo-serialization-avro" options="-proc:none -parameters" />
+      <module name="dubbo-serialization-fastjson" options="-proc:none -parameters" />
+      <module name="dubbo-serialization-fst" options="-proc:none -parameters" />
+      <module name="dubbo-serialization-gson" options="-proc:none -parameters" />
+      <module name="dubbo-serialization-hessian2" options="-proc:none -parameters" />
+      <module name="dubbo-serialization-hessian2 (1)" options="-proc:none -parameters" />
+      <module name="dubbo-serialization-jdk" options="-proc:none -parameters" />
+      <module name="dubbo-serialization-jdk (1)" options="-proc:none -parameters" />
+      <module name="dubbo-serialization-kryo" options="-proc:none -parameters" />
+      <module name="dubbo-serialization-msgpack" options="-proc:none -parameters" />
+      <module name="dubbo-serialization-native-hession" options="-proc:none -parameters" />
+      <module name="dubbo-serialization-protobuf" options="-proc:none -parameters" />
+      <module name="dubbo-serialization-protostuff" options="-proc:none -parameters" />
+      <module name="dubbo-serialization-test" options="-proc:none -parameters" />
+      <module name="dubbo-spring-boot-actuator" options="-parameters" />
+      <module name="dubbo-spring-boot-actuator (1)" options="-parameters" />
+      <module name="dubbo-spring-boot-actuator-compatible" options="-parameters" />
+      <module name="dubbo-spring-boot-actuator-compatible (1)" options="-parameters" />
+      <module name="dubbo-spring-boot-autoconfigure" options="-parameters" />
+      <module name="dubbo-spring-boot-autoconfigure (1)" options="-parameters" />
+      <module name="dubbo-spring-boot-autoconfigure-compatible" options="-parameters" />
+      <module name="dubbo-spring-boot-autoconfigure-compatible (1)" options="-parameters" />
+      <module name="dubbo-spring-boot-starter" options="-parameters" />
+      <module name="dubbo-spring-boot-starter (1)" options="-parameters" />
+      <module name="dubbo-test-check" options="-proc:none -parameters" />
+      <module name="dubbo-test-common" options="-proc:none -parameters" />
+      <module name="dubbo-test-spring" options="-proc:none -parameters" />
+      <module name="dubbo-test-spring3.2" options="-proc:none -parameters" />
+      <module name="dubbo-test-spring4.1" options="-proc:none -parameters" />
+      <module name="dubbo-test-spring4.2" options="-proc:none -parameters" />
+    </option>
+  </component>
+</project>
