@@ -17,6 +17,11 @@
 package org.apache.dubbo.common.extension;
 
 /**
+ * @description
+  * @param: null
+ * @date: 2021/12/11 8:55
+ * @return:
+ * @author: xjl
  * ExtensionFactory
  */
 @SPI

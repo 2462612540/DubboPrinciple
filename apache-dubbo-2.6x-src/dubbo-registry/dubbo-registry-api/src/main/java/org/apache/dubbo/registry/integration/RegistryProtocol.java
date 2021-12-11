@@ -194,6 +194,7 @@ public class RegistryProtocol implements Protocol {
 
     @Override
     public <T> Exporter<T> export(final Invoker<T> originInvoker) throws RpcException {
+
         URL registryUrl = getRegistryUrl(originInvoker);
         // url to export locally
         URL providerUrl = getProviderUrl(originInvoker);
@@ -207,27 +208,29 @@ public class RegistryProtocol implements Protocol {
         overrideListeners.put(overrideSubscribeUrl, overrideSubscribeListener);
 
         providerUrl = overrideUrlWithConfig(providerUrl, overrideSubscribeListener);
-        // export invoker
+
+        //export invoker这里就是进行前面说的dubbo:// 的暴露，并且还会打开端口等操作
         final ExporterChangeableWrapper<T> exporter = doLocalExport(originInvoker, providerUrl);
 
-        // url to registry
+        //获取注册中心的URL 比如zookeeper://127.0.0.1:2181/ 根据URL的加载Registry的实现类 比如我们这里用的就是 ZookeeperRegistry
         final Registry registry = getRegistry(originInvoker);
         final URL registeredProviderUrl = getUrlToRegistry(providerUrl, registryUrl);
 
         // decide if we need to delay publish
         boolean register = providerUrl.getParameter(REGISTER_KEY, true);
         if (register) {
+            //如果需要注册 想注册中心注册服务
             registry.register(registeredProviderUrl);
         }
 
-        // register stated url on provider model
+        // 获取注册的服务提供者的URL，这里就是刚才我们说的 Dubbo://... .
         registerStatedUrl(registryUrl, registeredProviderUrl, register);
 
 
         exporter.setRegisterUrl(registeredProviderUrl);
         exporter.setSubscribeUrl(overrideSubscribeUrl);
 
-        // Deprecated! Subscribe to override rules in 2.6.x or before.
+        //想注册中心订阅
         registry.subscribe(overrideSubscribeUrl, overrideSubscribeListener);
 
         notifyExport(exporter);

@@ -284,10 +284,10 @@ public class DubboProtocol extends AbstractProtocol {
 
     @Override
     public <T> Exporter<T> export(Invoker<T> invoker) throws RpcException {
-        URL url = invoker.getUrl();
+        URL url = invoker.getUrl();//获取URL,这里拿到的是dubbo://192.168.1.17:20880/...
 
         // export service.
-        String key = serviceKey(url);
+        String key = serviceKey(url);// 这的key 是com.alibaba.dubbo.demo.Demoservce:20880
         DubboExporter<T> exporter = new DubboExporter<T>(invoker, key, exporterMap);
         exporterMap.put(key, exporter);
 
@@ -304,7 +304,7 @@ public class DubboProtocol extends AbstractProtocol {
 
             }
         }
-
+        // 打开server的关键
         openServer(url);
         optimizeSerialization(url);
 
@@ -333,6 +333,7 @@ public class DubboProtocol extends AbstractProtocol {
     }
 
     private ProtocolServer createServer(URL url) {
+        //采用了netty 基础；来实现的
         url = URLBuilder.from(url)
                 // send readonly event when server closes, it's enabled by default
                 .addParameterIfAbsent(CHANNEL_READONLYEVENT_SENT_KEY, Boolean.TRUE.toString())
@@ -348,6 +349,7 @@ public class DubboProtocol extends AbstractProtocol {
 
         ExchangeServer server;
         try {
+            // 根据URL 调用对饮的server  默认是netty 并初始化Handler
             server = Exchangers.bind(url, requestHandler);
         } catch (RemotingException e) {
             throw new RpcException("Fail to start server(url: " + url + ") " + e.getMessage(), e);

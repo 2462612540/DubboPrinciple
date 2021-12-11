@@ -186,7 +186,7 @@ public class DubboBootstrap {
     private List<CompletableFuture<Object>> asyncReferringFutures = new ArrayList<>();
 
     /**
-     * See {@link ApplicationModel} and {@link ExtensionLoader} for why DubboBootstrap is designed to be singleton.
+     * 查看 {ApplicationModel}和{ExtensionLoader}了解为什么 DubboBootstrap被设计为单例。
      */
     public static DubboBootstrap getInstance() {
         if (instance == null) {

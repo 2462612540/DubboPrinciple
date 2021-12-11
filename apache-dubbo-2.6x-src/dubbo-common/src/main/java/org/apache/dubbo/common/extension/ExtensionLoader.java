@@ -79,6 +79,8 @@ import static org.apache.dubbo.common.constants.CommonConstants.REMOVE_VALUE_PRE
  * @see org.apache.dubbo.common.extension.SPI
  * @see org.apache.dubbo.common.extension.Adaptive
  * @see org.apache.dubbo.common.extension.Activate
+ *
+ * SPI的dubbo实现SPI扩展机制等核心，几乎所有实现的逻辑都被封装在ExtensionLoader中。
  */
 public class ExtensionLoader<T> {
 
@@ -91,22 +93,28 @@ public class ExtensionLoader<T> {
     private static final ConcurrentMap<Class<?>, Object> EXTENSION_INSTANCES = new ConcurrentHashMap<>(64);
 
     private final Class<?> type;
-
+    //工厂类
     private final ExtensionFactory objectFactory;
-
+    //缓存的扩展名与拓展类映射，和cachedClasses的key和value对换。
     private final ConcurrentMap<Class<?>, String> cachedNames = new ConcurrentHashMap<>();
-
+    //缓存的扩展实现类集合
     private final Holder<Map<String, Class<?>>> cachedClasses = new Holder<>();
-
+    //扩展名与加有@Activate的自动激活类的映射
     private final Map<String, Object> cachedActivates = new ConcurrentHashMap<>();
+    //缓存的扩展对象集合，key为扩展名，value为扩展对象
+    //例如Protocol扩展，key为dubbo，value为DubboProcotol
     private final ConcurrentMap<String, Holder<Object>> cachedInstances = new ConcurrentHashMap<>();
+    //缓存的自适应( Adaptive )扩展对象，例如例如AdaptiveExtensionFactory类的对象
     private final Holder<Object> cachedAdaptiveInstance = new Holder<>();
+    //缓存的自适应扩展对象的类，例如AdaptiveExtensionFactory类
     private volatile Class<?> cachedAdaptiveClass = null;
+    //缓存的默认扩展名，就是@SPI中设置的值
     private String cachedDefaultName;
+    //创建cachedAdaptiveInstance异常
     private volatile Throwable createAdaptiveInstanceError;
-
+    //拓展Wrapper实现类集合
     private Set<Class<?>> cachedWrapperClasses;
-
+    //拓展名与加载对应拓展类发生的异常的映射
     private Map<String, IllegalStateException> exceptions = new ConcurrentHashMap<>();
 
     /**
@@ -157,18 +165,22 @@ public class ExtensionLoader<T> {
 
     @SuppressWarnings("unchecked")
     public static <T> ExtensionLoader<T> getExtensionLoader(Class<T> type) {
+        //扩展点接口为空，抛出异常
         if (type == null) {
             throw new IllegalArgumentException("Extension type == null");
         }
+        //判断type是否是一个接口类
         if (!type.isInterface()) {
             throw new IllegalArgumentException("Extension type (" + type + ") is not an interface!");
         }
+        //判断是否为可扩展的接口
         if (!withExtensionAnnotation(type)) {
             throw new IllegalArgumentException("Extension type (" + type +
                     ") is not an extension, because it is NOT annotated with @" + SPI.class.getSimpleName() + "!");
         }
-
+        //从扩展加载器集合中取出扩展接口对应的扩展加载器
         ExtensionLoader<T> loader = (ExtensionLoader<T>) EXTENSION_LOADERS.get(type);
+        //如果为空，则创建该扩展接口的扩展加载器，并且添加到EXTENSION_LOADERS
         if (loader == null) {
             EXTENSION_LOADERS.putIfAbsent(type, new ExtensionLoader<T>(type));
             loader = (ExtensionLoader<T>) EXTENSION_LOADERS.get(type);
@@ -406,8 +418,7 @@ public class ExtensionLoader<T> {
     }
 
     /**
-     * Find the extension with the given name. If the specified name is not found, then {@link IllegalStateException}
-     * will be thrown.
+     * 查找具有给定名称的扩展名。如果未找到指定的名称抛错
      */
     @SuppressWarnings("unchecked")
     public T getExtension(String name) {
@@ -415,6 +426,7 @@ public class ExtensionLoader<T> {
     }
 
     public T getExtension(String name, boolean wrap) {
+        //扩展点接口为空，抛出异常
         if (StringUtils.isEmpty(name)) {
             throw new IllegalArgumentException("Extension name == null");
         }
