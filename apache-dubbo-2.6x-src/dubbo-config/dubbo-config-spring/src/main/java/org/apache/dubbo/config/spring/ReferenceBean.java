@@ -65,6 +65,7 @@ public class ReferenceBean<T> extends ReferenceConfig<T> implements FactoryBean,
 
     @Override
     public Object getObject() {
+        //懒汉式的
         return get();
     }
 

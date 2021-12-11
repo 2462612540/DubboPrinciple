@@ -414,12 +414,12 @@ public class DubboProtocol extends AbstractProtocol {
     }
 
     private ExchangeClient[] getClients(URL url) {
-        // whether to share connection
+        // 是否共享连接
         int connections = url.getParameter(CONNECTIONS_KEY, 0);
-        // if not configured, connection is shared, otherwise, one connection for one service
+        // 如果没有配置，连接是共享的，否则，一个服务一个连接
         if (connections == 0) {
             /*
-             * The xml configuration should have a higher priority than properties.
+             * xml 配置应该比属性具有更高的优先级。
              */
             String shareConnectionsStr = url.getParameter(SHARE_CONNECTIONS_KEY, (String) null);
             connections = Integer.parseInt(StringUtils.isBlank(shareConnectionsStr) ? ConfigUtils.getProperty(SHARE_CONNECTIONS_KEY,
@@ -428,6 +428,7 @@ public class DubboProtocol extends AbstractProtocol {
         } else {
             ExchangeClient[] clients = new ExchangeClient[connections];
             for (int i = 0; i < clients.length; i++) {
+                //得到初始化的新的客户端
                 clients[i] = initClient(url);
             }
             return clients;
@@ -588,14 +589,14 @@ public class DubboProtocol extends AbstractProtocol {
      */
     private ExchangeClient initClient(URL url) {
 
-        // client type setting.
+        // 客户端类型设置。 DEFAULT_REMOTING_CLIENT  netty
         String str = url.getParameter(CLIENT_KEY, url.getParameter(SERVER_KEY, DEFAULT_REMOTING_CLIENT));
 
         url = url.addParameter(CODEC_KEY, DubboCodec.NAME);
-        // enable heartbeat by default
+        // 默认开启心跳机制
         url = url.addParameterIfAbsent(HEARTBEAT_KEY, String.valueOf(DEFAULT_HEARTBEAT));
 
-        // BIO is not allowed since it has severe performance issue.
+        // BIO模式下是不允许的，因为它有严重的性能问题。
         if (str != null && str.length() > 0 && !ExtensionLoader.getExtensionLoader(Transporter.class).hasExtension(str)) {
             throw new RpcException("Unsupported client type: " + str + "," +
                     " supported client type is " +
@@ -604,7 +605,7 @@ public class DubboProtocol extends AbstractProtocol {
 
         ExchangeClient client;
         try {
-            // connection should be lazy
+            //懒加载连接
             if (url.getParameter(LAZY_CONNECT_KEY, false)) {
                 client = new LazyConnectExchangeClient(url, requestHandler);
 

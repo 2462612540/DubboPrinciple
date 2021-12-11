@@ -461,16 +461,19 @@ public class RegistryProtocol implements Protocol {
     @Override
     @SuppressWarnings("unchecked")
     public <T> Invoker<T> refer(Class<T> type, URL url) throws RpcException {
+        //取registry参数值，并将其设置为协议头
         url = getRegistryUrl(url);
+        // 获取中心实例
         Registry registry = getRegistry(url);
         if (RegistryService.class.equals(type)) {
             return proxyFactory.getInvoker((T) registry, type, url);
         }
 
-        // group="a,b" or group="*"
+        // group="a,b" or group="*"  将参数转为map
         Map<String, String> qs = StringUtils.parseQueryString(url.getParameterAndDecoded(REFER_KEY));
         String group = qs.get(GROUP_KEY);
         if (group != null && group.length() > 0) {
+            // 如果分group 的话
             if ((COMMA_SPLIT_PATTERN.split(group)).length > 1 || "*".equals(group)) {
                 return doRefer(Cluster.getCluster(MergeableCluster.NAME), registry, type, url, qs);
             }
@@ -481,6 +484,7 @@ public class RegistryProtocol implements Protocol {
     }
 
     protected <T> Invoker<T> doRefer(Cluster cluster, Registry registry, Class<T> type, URL url, Map<String, String> parameters) {
+        //产生服务消费者连接
         URL consumerUrl = new URL(CONSUMER_PROTOCOL, parameters.remove(REGISTER_IP_KEY), 0, type.getName(), parameters);
         ClusterInvoker<T> migrationInvoker = getMigrationInvoker(this, cluster, registry, type, url, consumerUrl);
         return interceptInvoker(migrationInvoker, url, consumerUrl);
@@ -505,28 +509,35 @@ public class RegistryProtocol implements Protocol {
 
     public <T> ClusterInvoker<T> getServiceDiscoveryInvoker(Cluster cluster, Registry registry, Class<T> type, URL url) {
         DynamicDirectory<T> directory = new ServiceDiscoveryRegistryDirectory<>(type, url);
+        //向提供者消费者服务表中记录这个信息
         return doCreateInvoker(directory, cluster, registry, type);
     }
 
     public <T> ClusterInvoker<T> getInvoker(Cluster cluster, Registry registry, Class<T> type, URL url) {
         // FIXME, this method is currently not used, create the right registry before enable.
         DynamicDirectory<T> directory = new RegistryDirectory<>(type, url);
+        ////向提供者消费者服务表中记录这个信息
         return doCreateInvoker(directory, cluster, registry, type);
     }
 
     protected <T> ClusterInvoker<T> doCreateInvoker(DynamicDirectory<T> directory, Cluster cluster, Registry registry, Class<T> type) {
+        // 设置注册中心实例
         directory.setRegistry(registry);
+        // 设置动态生成的protocol $Adaptive
         directory.setProtocol(protocol);
         // all attributes of REFER_KEY
         Map<String, String> parameters = new HashMap<String, String>(directory.getConsumerUrl().getParameters());
+        // 生成服务者消费链接
         URL urlToRegistry = new URL(CONSUMER_PROTOCOL, parameters.remove(REGISTER_IP_KEY), 0, type.getName(), parameters);
         if (directory.isShouldRegister()) {
             directory.setRegisteredConsumerUrl(urlToRegistry);
+            // 向注册中心 注册消费者 在consumer 目录下创建新节点
             registry.register(directory.getRegisteredConsumerUrl());
         }
         directory.buildRouterChain(urlToRegistry);
+        //再订阅注册中心的 providers目录、 configurators目录和routers目录，订阅好了之后就会触发 DubboProtocol的refer方法.
         directory.subscribe(toSubscribeUrl(urlToRegistry));
-
+        //利用cluser封装direcotry其实就是封装多个invoker
         return (ClusterInvoker<T>) cluster.join(directory);
     }
 
