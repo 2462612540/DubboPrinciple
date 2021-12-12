@@ -1,3 +1,0 @@
-metadata-url=org.apache.dubbo.registry.client.metadata.MetadataServiceURLParamsMetadataCustomizer
-protocol-ports=org.apache.dubbo.registry.client.metadata.ProtocolPortsMetadataCustomizer
-instance-metadata=org.apache.dubbo.registry.client.metadata.ServiceInstanceMetadataCustomizer

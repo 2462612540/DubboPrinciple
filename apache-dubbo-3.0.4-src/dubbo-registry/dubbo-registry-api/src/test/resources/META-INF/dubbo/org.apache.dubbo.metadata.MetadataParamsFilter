@@ -1,2 +1,0 @@
-customized=org.apache.dubbo.registry.client.metadata.store.CustomizedParamsFilter
-excluded=org.apache.dubbo.registry.client.metadata.store.ExcludedParamsFilter
