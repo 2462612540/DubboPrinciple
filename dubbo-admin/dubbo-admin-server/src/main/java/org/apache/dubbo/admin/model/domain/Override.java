@@ -28,11 +28,12 @@ public class Override extends Entity {
     private static final long serialVersionUID = 114828505391757846L;
 
     private String service;
-
+    // 用于保存多个key-value集合，值之间用&符号分
     private String params;
-
+    // 用户配置的服务名称，如果为空则表示所有服
     private String application;
-
+    // 服务的IP地址，如果填写具体的IP则对具体的IP生效，不填则会
+    //对所有的服务生效，在注册中心会变为0.0.0.0
     private String address;
 
     private String username;
