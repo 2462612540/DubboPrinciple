@@ -35,22 +35,22 @@ import static org.apache.dubbo.common.serialize.Constants.HESSIAN2_SERIALIZATION
  * </pre>
  */
 public class Hessian2Serialization implements Serialization {
-
+    // hessian2的ContentType ID
     @Override
     public byte getContentTypeId() {
         return HESSIAN2_SERIALIZATION_ID;
     }
-
+    // hessian2的ContentType
     @Override
     public String getContentType() {
         return "x-application/hessian2";
     }
-
+    // 创建ObjectOutput对象
     @Override
     public ObjectOutput serialize(URL url, OutputStream out) throws IOException {
         return new Hessian2ObjectOutput(out);
     }
-
+    // 创建ObjectInput对象
     @Override
     public ObjectInput deserialize(URL url, InputStream is) throws IOException {
         return new Hessian2ObjectInput(is);
