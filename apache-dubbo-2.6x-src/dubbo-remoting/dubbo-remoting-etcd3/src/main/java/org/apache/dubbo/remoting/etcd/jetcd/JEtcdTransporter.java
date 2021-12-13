@@ -19,11 +19,18 @@ package org.apache.dubbo.remoting.etcd.jetcd;
 import org.apache.dubbo.common.URL;
 import org.apache.dubbo.remoting.etcd.EtcdClient;
 import org.apache.dubbo.remoting.etcd.EtcdTransporter;
-
+/**
+ * @description transporter扩展点实现
+  * @param: null
+ * @date: 2021/12/13 22:27
+ * @return:
+ * @author: xjl
+*/
 public class JEtcdTransporter implements EtcdTransporter {
 
     @Override
     public EtcdClient connect(URL url) {
+        //直接返回具体客户端即
         return new JEtcdClient(url);
     }
 
