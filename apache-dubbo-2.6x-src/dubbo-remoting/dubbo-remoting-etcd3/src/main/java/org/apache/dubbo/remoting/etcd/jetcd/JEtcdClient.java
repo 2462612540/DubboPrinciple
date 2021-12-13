@@ -130,12 +130,12 @@ public class JEtcdClient extends AbstractEtcdClient<JEtcdClient.EtcdWatcher> {
     public EtcdWatcher createChildWatcherListener(String path, ChildListener listener) {
         return new EtcdWatcher(listener);
     }
-    //添加etcd状态变更监听
+    // 添加etcd状态变更监听
     @Override
     public List<String> addChildWatcherListener(String path, EtcdWatcher etcdWatcher) {
         return etcdWatcher.forPath(path);
     }
-    //移除etcd状态变更监听
+    // 移除etcd状态变更监听
     @Override
     public void removeChildWatcherListener(String path, EtcdWatcher etcdWatcher) {
         etcdWatcher.unwatch();
