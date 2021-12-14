@@ -24,10 +24,11 @@ public class LoadBalance extends Entity {
 
     public static final String ALL_METHOD = "*";
     private static final long serialVersionUID = -6050324375352581440L;
+    //服务名称
     private String service;            /* service name */
-
+    // 方法名
     private String method;             /* method name */
-
+    // 负载均衡策略
     private String strategy;              /*loadbalance policy*/
 
     private String username;
@@ -70,6 +71,5 @@ public class LoadBalance extends Entity {
     public void setUsername(String username) {
         this.username = username;
     }
-
 
 }

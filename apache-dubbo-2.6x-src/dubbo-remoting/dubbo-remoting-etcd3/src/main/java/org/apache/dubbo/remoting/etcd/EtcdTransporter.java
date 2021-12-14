@@ -37,7 +37,13 @@ import org.apache.dubbo.common.URL;
 import org.apache.dubbo.common.extension.Adaptive;
 import org.apache.dubbo.common.extension.SPI;
 import org.apache.dubbo.remoting.Constants;
-
+/**
+ * @description  在注册中心初始化时会通过这个transporter初始化真实的交互client
+  * @param: null
+ * @date: 2021/12/13 22:26
+ * @return:
+ * @author: xjl
+*/
 @SPI("jetcd")
 public interface EtcdTransporter {
 

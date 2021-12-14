@@ -24,12 +24,18 @@ import org.apache.dubbo.remoting.etcd.EtcdTransporter;
 public class EtcdRegistryFactory extends AbstractRegistryFactory {
 
     private EtcdTransporter etcdTransporter;
-
+    /**
+     * @description  直接返回etcd注册中心实例
+      * @param: url
+     * @date: 2021/12/13 22:32
+     * @return: org.apache.dubbo.registry.Registry
+     * @author: xjl
+    */
     @Override
     protected Registry createRegistry(URL url) {
         return new EtcdRegistry(url, etcdTransporter);
     }
-
+    // 自动注入 tranportep 扩展点
     public void setEtcdTransporter(EtcdTransporter etcdTransporter) {
         this.etcdTransporter = etcdTransporter;
     }

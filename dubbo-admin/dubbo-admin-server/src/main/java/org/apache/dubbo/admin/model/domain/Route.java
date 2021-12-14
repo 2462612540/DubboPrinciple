@@ -44,27 +44,27 @@ public class Route extends Entity {
     public static final String KEY_PROVIDER_PORT = "provider.port";
     private static final long serialVersionUID = -7630589008164140656L;
     private long parentId; //default 0
-
+    // 应用名
     private String name;
-
+    // 服务名
     private String service;
-
+    // 填写路由规
     private String rule;
 
     private String matchRule;
 
     private String filterRule;
-
+    // 规则的优先级
     private int priority;
 
     private String username;
-
+    // 是否启用该路由规则，可填true/false
     private boolean enabled;
-
+    //是否强制，可填true/false
     private boolean force;
-
+    //是否持久化数据，如果是，则注册方下线数据也会保留，可填 true/false
     private boolean dynamic;
-
+    // 是否运行时，可填false/true
     private boolean runtime;
 
     private List<Route> children;

@@ -130,43 +130,43 @@ public class JEtcdClient extends AbstractEtcdClient<JEtcdClient.EtcdWatcher> {
     public EtcdWatcher createChildWatcherListener(String path, ChildListener listener) {
         return new EtcdWatcher(listener);
     }
-
+    // 添加etcd状态变更监听
     @Override
     public List<String> addChildWatcherListener(String path, EtcdWatcher etcdWatcher) {
         return etcdWatcher.forPath(path);
     }
-
+    // 移除etcd状态变更监听
     @Override
     public void removeChildWatcherListener(String path, EtcdWatcher etcdWatcher) {
         etcdWatcher.unwatch();
     }
-
+    // 获取子节点数
     @Override
     public List<String> getChildren(String path) {
         return clientWrapper.getChildren(path);
     }
-
+    // 检查etcd状态是否连接
     @Override
     public boolean isConnected() {
         return clientWrapper.isConnected();
     }
-
+    // 创建租约
     @Override
     public long createLease(long second) {
         return clientWrapper.createLease(second);
     }
-
+    // 创建租约
     @Override
     public long createLease(long ttl, long timeout, TimeUnit unit)
             throws InterruptedException, ExecutionException, TimeoutException {
         return clientWrapper.createLease(ttl, timeout, unit);
     }
-
+    // 删除节点
     @Override
     public void delete(String path) {
         clientWrapper.delete(path);
     }
-
+    // 回收租约
     @Override
     public void revokeLease(long lease) {
         clientWrapper.revokeLease(lease);
@@ -230,8 +230,7 @@ public class JEtcdClient extends AbstractEtcdClient<JEtcdClient.EtcdWatcher> {
 
         @Override
         public void onNext(WatchResponse response) {
-
-            // prevents grpc on sending watchResponse to a closed watch client.
+            // 防止 grpc 将 watchResponse 发送到关闭的监视客户端。
             if (!isConnected()) {
                 return;
             }
@@ -277,7 +276,7 @@ public class JEtcdClient extends AbstractEtcdClient<JEtcdClient.EtcdWatcher> {
 
         public void unwatch() {
 
-            // prevents grpc on sending watchResponse to a closed watch client.
+            // 阻止 grpc 将 watchResponse 发送到关闭的监视客户端.
             if (!isConnected()) {
                 return;
             }
