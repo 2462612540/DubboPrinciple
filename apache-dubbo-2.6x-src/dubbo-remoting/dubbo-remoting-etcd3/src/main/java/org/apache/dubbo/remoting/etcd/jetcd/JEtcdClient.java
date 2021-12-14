@@ -230,7 +230,6 @@ public class JEtcdClient extends AbstractEtcdClient<JEtcdClient.EtcdWatcher> {
 
         @Override
         public void onNext(WatchResponse response) {
-
             // 防止 grpc 将 watchResponse 发送到关闭的监视客户端。
             if (!isConnected()) {
                 return;
