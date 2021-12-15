@@ -19,7 +19,7 @@ public class ProxyFactory {
         return (T) Proxy.newProxyInstance(interfaceClass.getClassLoader(), new Class[]{interfaceClass}, new InvocationHandler() {
             @Override
             public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-                Protocol Protocol = new HttpProtocol();
+                Protocol Protocol = ProtocolFactory.getProtocol();
                 Invocation invocation = new Invocation(interfaceClass.getName(), method.getName(), method.getParameterTypes(), args);
                 URL url = RemoteMapRegister.random(interfaceClass.getName());
                 String result = Protocol.send(url, invocation);

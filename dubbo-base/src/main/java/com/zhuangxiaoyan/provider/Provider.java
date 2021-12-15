@@ -1,8 +1,8 @@
 package com.zhuangxiaoyan.provider;
 
 import com.zhuangxiaoyan.framework.Protocol;
+import com.zhuangxiaoyan.framework.ProtocolFactory;
 import com.zhuangxiaoyan.framework.URL;
-import com.zhuangxiaoyan.protocol.http.HttpProtocol;
 import com.zhuangxiaoyan.provider.api.HelloService;
 import com.zhuangxiaoyan.provider.impl.HelloServiceImpl;
 import com.zhuangxiaoyan.register.LocalRegister;
@@ -26,7 +26,7 @@ public class Provider {
         RemoteMapRegister.regist(HelloService.class.getName(), url);
 
         //3 启动tomcat
-        Protocol protocol = new HttpProtocol();
+        Protocol protocol = ProtocolFactory.getProtocol();
         protocol.steret(url);
 
     }
