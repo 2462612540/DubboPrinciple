@@ -1,7 +1,8 @@
 package com.zhuangxiaoyan.provider;
 
+import com.zhuangxiaoyan.framework.Protocol;
 import com.zhuangxiaoyan.framework.URL;
-import com.zhuangxiaoyan.protocol.http.HttpServer;
+import com.zhuangxiaoyan.protocol.http.HttpProtocol;
 import com.zhuangxiaoyan.provider.api.HelloService;
 import com.zhuangxiaoyan.provider.impl.HelloServiceImpl;
 import com.zhuangxiaoyan.register.LocalRegister;
@@ -22,11 +23,11 @@ public class Provider {
         //2 远程注册中心
         //{服务名：list<URL>}
         URL url = new URL("localhost", 8080);
-        RemoteMapRegister.regist(HelloService.class.getName(),url);
+        RemoteMapRegister.regist(HelloService.class.getName(), url);
 
         //3 启动tomcat
-        HttpServer httpServer = new HttpServer();
-        httpServer.start("localhost", 8080);
+        Protocol protocol = new HttpProtocol();
+        protocol.steret(url);
 
     }
 }

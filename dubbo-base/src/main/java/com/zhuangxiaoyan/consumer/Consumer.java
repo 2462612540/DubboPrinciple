@@ -1,7 +1,6 @@
 package com.zhuangxiaoyan.consumer;
 
-import com.zhuangxiaoyan.framework.Invocation;
-import com.zhuangxiaoyan.protocol.http.HttpClient;
+import com.zhuangxiaoyan.framework.ProxyFactory;
 import com.zhuangxiaoyan.provider.api.HelloService;
 
 /**
@@ -13,9 +12,8 @@ import com.zhuangxiaoyan.provider.api.HelloService;
 public class Consumer {
 
     public static void main(String[] args) {
-        HttpClient httpClient = new HttpClient();
-        Invocation invocation = new Invocation(HelloService.class.getName(), "sayHello", new Class[]{String.class}, new Object[]{"庄小焱"});
-        String result = httpClient.send("localhost", 8080, invocation);
-        System.out.println(result);
+        HelloService helloService = ProxyFactory.getProxyFactory(HelloService.class);
+
+        System.out.println(helloService.sayHello("庄小焱……丫头"));
     }
 }

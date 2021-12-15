@@ -1,12 +1,14 @@
 package com.zhuangxiaoyan.framework;
 
+import java.io.Serializable;
+
 /**
  * @Classname URL
  * @Description
  * @Date 2021/12/14 21:55
  * @Created by xjl
  */
-public class URL {
+public class URL implements Serializable {
 
     private String hostname;
     private Integer port;
